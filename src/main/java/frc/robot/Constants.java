@@ -106,6 +106,14 @@ public final class Constants {
 		// TODO: Is gyro reversed?
 		public static final boolean kGyroReversed = false;
 
+		// PID constants for TurnCommand
+		public static double kTurnP = .1;
+		public static double kTurnI = 0;
+		public static double kTurnD = 0;
+
+		public static double kTurnToleranceDeg = 5;
+		public static double kTurnRateToleranceDegPerS = 0;
+
 	}
 
 	/**

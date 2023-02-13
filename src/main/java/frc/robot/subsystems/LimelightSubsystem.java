@@ -7,16 +7,19 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.Objects.Limelight;
+import frc.robot.Constants.LimelightConstants;
 
 public class LimelightSubsystem extends SubsystemBase {
 
 	private Limelight limelight;
-	private Servo exampleServo;
+	private Servo LimeLightFlipper;
 
 	/** Creates a new LimelightSubsystem */
 	public LimelightSubsystem() {
 		limelight = new Limelight();
+		LimeLightFlipper = new Servo(LimelightConstants.kServoPort);
 	}
 
 	/**

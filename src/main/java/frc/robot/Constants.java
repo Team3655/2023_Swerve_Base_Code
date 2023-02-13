@@ -197,4 +197,16 @@ public final class Constants {
 
 	}
 
+	public static class LimelightConstants {
+
+		// declare ID's of pipelines here 
+		public static int kRetroReflectivePipeline = 0;
+		public static int kApriltagPipeline = 1;
+
+		// Servo ID's
+		public static int kServoPort = 0;
+
+		//
+	}
+
 }

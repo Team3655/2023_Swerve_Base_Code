@@ -203,10 +203,12 @@ public final class Constants {
 		public static int kRetroReflectivePipeline = 0;
 		public static int kApriltagPipeline = 1;
 
-		// Servo ID's
+		// Servo Constants
 		public static int kServoPort = 0;
+		// sets the offset of the sevo so the limelight is facing forward (double 0 - 1)
+		public static double kServoZeroOffset = .5;
+		
 
-		//
 	}
 
 }

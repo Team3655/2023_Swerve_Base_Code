@@ -3,6 +3,8 @@ package frc.robot.Objects;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
+import frc.robot.Constants.LimelightConstants;;
+
 public class Limelight {
 
 	private boolean useVision;
@@ -42,12 +44,12 @@ public class Limelight {
 
 	/** Performs any reflective tape specific updates */
 	public void updateReflectiveTape() {
-		setPipeline(0);
+		setPipeline(LimelightConstants.kRetroReflectivePipeline);
 	}
 
 	/** Performs any AprilTag specific updates */
 	public void updateAprilTags() {
-		setPipeline(1);
+		setPipeline(LimelightConstants.kApriltagPipeline);
 	}
 
 	/** takes a snapshot for later use */

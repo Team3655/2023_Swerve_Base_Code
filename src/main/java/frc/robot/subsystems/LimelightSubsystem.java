@@ -20,6 +20,7 @@ public class LimelightSubsystem extends SubsystemBase {
 	public LimelightSubsystem() {
 		limelight = new Limelight();
 		LimeLightFlipper = new Servo(LimelightConstants.kServoPort);
+		LimeLightFlipper.set(LimelightConstants.kServoZeroOffset);
 	}
 
 	/**

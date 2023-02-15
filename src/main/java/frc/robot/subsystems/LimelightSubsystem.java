@@ -16,11 +16,13 @@ public class LimelightSubsystem extends SubsystemBase {
 	private Limelight limelight;
 	private Servo LimeLightFlipper;
 
+	private boolean isFront;
+
 	/** Creates a new LimelightSubsystem */
 	public LimelightSubsystem() {
 		limelight = new Limelight();
 		LimeLightFlipper = new Servo(LimelightConstants.kServoPort);
-		LimeLightFlipper.set(LimelightConstants.kServoZeroOffset);
+		LimeLightFlipper.set(LimelightConstants.kServoFrontPose);
 	}
 
 	/**
@@ -29,8 +31,6 @@ public class LimelightSubsystem extends SubsystemBase {
 	 * @return a command
 	 */
 	public CommandBase exampleMethodCommand() {
-		// Inline construction of command goes here.
-		// Subsystem::RunOnce implicitly requires `this` subsystem.
 		return runOnce(
 				() -> {
 					/* one-time action goes here */

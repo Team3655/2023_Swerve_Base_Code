@@ -4,44 +4,34 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-
-import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ArmSubsystem;
-import frc.robot.subsystems.ArmSubsystem.ArmPoses;
+import frc.robot.subsystems.LimelightSubsystem;
 
-/** A command used to tell the arms to run to a set of angles */
-public class ArmSwitchCommand extends SequentialCommandGroup {
-	@SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
-	private ArmSubsystem m_armSubsystem;
-	private IntakeSubsystem m_intakeSubsystem;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
-	/**
-	 * Creates a new ArmPoseCommand.
-	 *
-	 * @param subsystem The subsystem used by this command.
-	 */
-	public ArmSwitchCommand(ArmSubsystem armSubsystem, IntakeSubsystem intakeSubsystem) {
-		m_armSubsystem = armSubsystem;
-		m_intakeSubsystem = intakeSubsystem;
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+public class ArmSwitchCommand extends InstantCommand {
 
-		// Only allows the robot to switch if it's holding a cude (safetey issue)
-		if (m_intakeSubsystem.getHasCube()) {
+	ArmSubsystem armSubsystem;
+	LimelightSubsystem limelightSubsystem;
 
-			addCommands(
-					// Tuck the robot first (set to not be interruptable)
-					new ArmPoseCommand(m_armSubsystem, ArmPoses.TUCKED)
-							.withInterruptBehavior(InterruptionBehavior.kCancelIncoming),
-					// sets the new dominant side of the robot
-					m_armSubsystem.ToggleSide(),
-					// goes to prev position but now on the other side of the bot
-					new ArmPoseCommand(m_armSubsystem, m_armSubsystem.getPrevArmState()));
+  public ArmSwitchCommand(ArmSubsystem armSubsystem, LimelightSubsystem limelightSubsystem) {
 
-		} else {
-			// Notify drivers if the robot cannot be a switch
-			System.out.println("WARNING: cannot traverse robot without holding CUBE");
-		}
+	this.armSubsystem = armSubsystem;
+	this.limelightSubsystem = limelightSubsystem;
 
-	}
+    // Use addRequirements() here to declare subsystem dependencies.
+	addRequirements(armSubsystem);
+	addRequirements(limelightSubsystem);
+  }
+
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+	armSubsystem.ToggleSide();
+	
+  }
 
 }

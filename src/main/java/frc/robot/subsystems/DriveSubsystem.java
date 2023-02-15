@@ -32,7 +32,6 @@ public class DriveSubsystem extends SubsystemBase {
 
 	private boolean fieldRelative;
 
-
 	/** Creates a new DriveSubsystem. */
 	public DriveSubsystem() {
 

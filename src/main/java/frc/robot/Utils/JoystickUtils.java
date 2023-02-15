@@ -1,6 +1,6 @@
 package frc.robot.Utils;
 
-import frc.robot.Constants.OperatorConstants;;
+import frc.robot.Constants.OperatorConstants;
 
 public class JoystickUtils {
 	

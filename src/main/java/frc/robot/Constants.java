@@ -36,25 +36,25 @@ public final class Constants {
 
 		// NEO drive motor CAN ID's
 		public static final int kFrontLeftDriveMotorPort = 1;
-		public static final int kFrontRightDriveMotorPort = 4;
-		public static final int kRearLeftDriveMotorPort = 7;
-		public static final int kRearRightDriveMotorPort = 10;
+		public static final int kFrontRightDriveMotorPort = 2;
+		public static final int kRearLeftDriveMotorPort = 3;
+		public static final int kRearRightDriveMotorPort = 4;
 
 		// NEO turning motor CAN ID's
-		public static final int kFrontLeftTurningMotorPort = 2;
-		public static final int kFrontRightTurningMotorPort = 5;
-		public static final int kRearLeftTurningMotorPort = 8;
-		public static final int kRearRightTurningMotorPort = 11;
+		public static final int kFrontLeftTurningMotorPort = 5;
+		public static final int kFrontRightTurningMotorPort = 6;
+		public static final int kRearLeftTurningMotorPort = 7;
+		public static final int kRearRightTurningMotorPort = 8;
 
 		// CANcoder CAN ID's
-		public static final int kFrontLeftTurningEncoderPort = 3;
-		public static final int kFrontRightTurningEncoderPort = 9;
-		public static final int kRearLeftTurningEncoderPort = 6;
+		public static final int kFrontLeftTurningEncoderPort = 9;
+		public static final int kFrontRightTurningEncoderPort = 10;
+		public static final int kRearLeftTurningEncoderPort = 11;
 		public static final int kRearRightTurningEncoderPort = 12;
 
 		// TODO: Set angle offset for CANcoders
 		// Offset angle for absolute encoders (find this using REV client)
-		public static final double kFrontLeftAngleZero = 62.666015;	
+		public static final double kFrontLeftAngleZero = 62.666015;
 		public static final double kFrontRightAngleZero = 333.544921;
 		public static final double kRearLeftAngleZero = 326.513671;
 		public static final double kRearRightAngleZero = 352.617187;
@@ -140,7 +140,7 @@ public final class Constants {
 		public static final int kDriverControllerPort = 0;
 		public static final int kOperatorControllerPort = 1;
 
-		public static final double KDeadBand = .05;
+		public static final double KDeadBand = .1;
 	}
 
 	/**
@@ -148,8 +148,11 @@ public final class Constants {
 	 */
 	public static class ArmConstants {
 
-		public static final int kMajorArmDir = -1;
-		public static final int kMinorArmDir = 1;
+		// NEO turning motor CAN ID's
+		public static final int kRightMajorArmPort = 13;
+		public static final int kLeftMajorArmPort = 14;
+		public static final int kRightMinorArmPort = 15;
+		public static final int kLeftMinorArmPort = 16;
 
 		public static final int kMajorArmGearBoxRatio = 100;
 		public static final int kMinorArmGearBoxRatio = 100;
@@ -158,7 +161,7 @@ public final class Constants {
 		public static final int kMinorArmBeltRatio = 1;
 
 		/**
-		 * the total number of ticks for one 360 degree rotation of the arm
+		 * the total number of motor rotations for one 360 degree rotation of the arm
 		 */
 		public static final int kMajorArmTicks = kMajorArmGearBoxRatio * kMajorArmBeltRatio;
 		public static final int kMinorArmTicks = kMinorArmGearBoxRatio * kMinorArmBeltRatio;
@@ -170,23 +173,25 @@ public final class Constants {
 		public static final int kMajorArmLength = 38;
 		public static final int kMinorArmLength = 23;
 
-		// NEO turning motor CAN ID's
-		public static final int kRightMajorArmPort = 14;
-		public static final int kLeftMajorArmPort = 15;
-		public static final int kRightMinorArmPort = 16;
-		public static final int kLeftMinorArmPort = 17;
-
 		// current limits of the arms
 		public static final int kMajorArmCurrentLimit = 30;
 		public static final int kMinorArmCurrentLimit = 30;
 
+		// speed limits for the arms 
+		public static final double kMajorArmPIDOutputLimit = .4;
+		public static final double kMinorArmPIDOutputLimit = .3;
+
+		// angle limits for the arms (min will be set to -input)
+		public static final double kMajorArmConstraints = 90;
+		public static final double kMinorArmConstraints = 180;
+
 		// Arm PID constants
-		public static final double kMajorArmP = .1;
-		public static final double kMajorArmI = 1e-4;
-		public static final double kMajorArmD = .5;
-		public static final double kMinorArmP = .1;
-		public static final double kMinorArmI = 1e-4;
-		public static final double kMinorArmD = .5;
+		public static final double kMajorArmP = 3;
+		public static final double kMajorArmI = .0001;
+		public static final double kMajorArmD = 0;
+		public static final double kMinorArmP = 3;
+		public static final double kMinorArmI = .0001;
+		public static final double kMinorArmD = 0;
 
 	}
 

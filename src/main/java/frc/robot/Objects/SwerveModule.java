@@ -44,7 +44,7 @@ public class SwerveModule extends SubsystemBase {
 			String moduleName,
 			int driveMotorChannel,
 			int turningMotorChannel,
-			int turningEncoderPorts,
+			int turningEncoderPort,
 			double angleZero,
 			double[] angularPID,
 			double[] drivePID) {
@@ -61,7 +61,7 @@ public class SwerveModule extends SubsystemBase {
 		driveMotor.restoreFactoryDefaults();
 
 		// Initalize CANcoder
-		absoluteEncoder = new CANCoder(turningEncoderPorts);
+		absoluteEncoder = new CANCoder(turningEncoderPort);
 
 		absoluteEncoder.configSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
 		absoluteEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);

@@ -11,12 +11,12 @@ import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ArmSubsystem.ArmPoses;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.DashboardSubsystem;
 
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ArmPoseCommand;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 
@@ -40,6 +40,7 @@ public class RobotContainer {
 	private final DriveSubsystem driveSubsystem = new DriveSubsystem();
 	private final DashboardSubsystem dashboardSubsystem = new DashboardSubsystem(driveSubsystem);
 	private final ArmSubsystem armSubsystem = new ArmSubsystem();
+	private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
 	// Replace with CommandPS4Controller or CommandJoystick if needed
 	private final CommandXboxController driverController = new CommandXboxController(
@@ -69,15 +70,23 @@ public class RobotContainer {
 		// Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 		new Trigger(exampleSubsystem::exampleCondition).onTrue(new ExampleCommand(exampleSubsystem));
 
-		// Schedule `exampleMethodCommand` when the Xbox controller's B button is
-		// pressed, cancelling on release.
-		driverController.a().onTrue(new ArmPoseCommand(armSubsystem, ArmPoses.MID_SCORE));
-		driverController.b().onTrue(new ArmPoseCommand(armSubsystem, ArmPoses.MID_INTAKE));
-		driverController.y().onTrue(new ArmPoseCommand(armSubsystem, ArmPoses.LOW_SCORE));
-		driverController.x().onTrue(new ArmPoseCommand(armSubsystem, ArmPoses.TUCKED));
+		// Schedule ArmPoseCommand when operator presses coresponding button.
+		operatorController.button(1).onTrue(new ArmPoseCommand(armSubsystem, ArmPoses.LOW_SCORE));
+		operatorController.button(2).onTrue(new ArmPoseCommand(armSubsystem, ArmPoses.MID_SCORE));
+		operatorController.button(3).onTrue(new ArmPoseCommand(armSubsystem, ArmPoses.HIGH_SCORE));
 
-		
+		operatorController.button(6).onTrue(new ArmPoseCommand(armSubsystem, ArmPoses.LOW_INTAKE));
+		operatorController.button(7).onTrue(new ArmPoseCommand(armSubsystem, ArmPoses.MID_INTAKE));
+		operatorController.button(8).onTrue(new ArmPoseCommand(armSubsystem, ArmPoses.HIGH_INTAKE));
+
+		operatorController.button(4).onTrue(new ArmPoseCommand(armSubsystem, ArmPoses.TUCKED));
+
+		// Switches sides of the robot, VERY DANGEROUS! HAS NOT BEEN TESTED!
+		operatorController.button(9).onTrue(armSubsystem.ToggleSide());
+
+		// Toggles field centric for the driver
 		new Trigger(driverController.back()).onTrue(driveSubsystem.toggleFieldCentric());
+		// Resets gyro for driver
 		new Trigger(driverController.start()).onTrue(driveSubsystem.zeroHeading());
 
 		// Swerve Drive method is set as default for drive subsystem
